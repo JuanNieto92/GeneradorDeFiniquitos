@@ -26,5 +26,12 @@ namespace GeneradorDeFiniquitos.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public ActionResult GenerarFiniquitos()
+        {
+            ViewBag.Message = "Your contact page.";
+            return View("../Forms/GenerarFiniquitos");
+        }
     }
 }
