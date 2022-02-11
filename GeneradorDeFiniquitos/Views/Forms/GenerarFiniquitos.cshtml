@@ -3,5 +3,52 @@
     ViewBag.Title = "GenerarFiniquitos";
 }
 
-<h2>GenerarFiniquitos</h2>
+<h2>Generar Finiquitos</h2>
 
+@model GeneradorDeFiniquitos.Models.ModeloArchivoFiniquito
+@{
+    ViewBag.Title = "FormSolicitudPCR";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("ReadExcel", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div class="row">
+        <div class="col-md-12 form-group">
+            @Html.Label("Subir Excel")
+            @Html.LabelFor(x => x.archivo, new { @class = "sr-only" })
+            @Html.TextBoxFor(x => x.archivo, new { @class = "form-control", @required = true, @type = "file" })
+        </div>
+    </div>
+
+    @*<div class="row">
+        <div class="col-md-12 form-group">
+            @Html.LabelFor(x => x.rutProfesional, new { @class = "sr-only" })
+            @Html.TextBoxFor(x => x.rutProfesional, new { @class = "form-control", @placeholder = "17132809-8", @required = true, @Value = "17132809-8" })
+        </div>
+    </div>*@
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-success">Generar Finiquito</button>
+        </div>
+    </div>
+
+    <br />
+    if (ViewBag.exito != null)
+    {
+        <div class="alert alert-success" role="alert">
+            Solicitud generada correctamente!
+        </div>
+    }
+    else
+    {
+        if (ViewBag.mensajeError != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.mensajeError
+            </div>
+        }
+    }
+
+}
